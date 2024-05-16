@@ -1,7 +1,3 @@
-# CLASE-TRES
+# CLASE-UNO
 
-- clase tres 
-
-- comandos abanzados
-
-**MI COMMIT (PABLO BAEZ)**
+JORGE LEONEL TONGUINO 15/05/2024
