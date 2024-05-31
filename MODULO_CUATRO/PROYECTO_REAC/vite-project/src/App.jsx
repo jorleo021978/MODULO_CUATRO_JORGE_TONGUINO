@@ -12,7 +12,7 @@ function App() {
     <div className='container'>      
         <div className='text'>
         <Image url={Unknown}/>
-        <Card titulo='Es un titulo..'/>
+        <Card titulo='Unknown'/>
         <Detail genre='Accion' status='ok'/>
         </div>
     </div>    
