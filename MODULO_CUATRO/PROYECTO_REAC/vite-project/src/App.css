@@ -1,6 +1,14 @@
 .container{
-  border-radius: 20px;
-  border: solid 2px rgb(235, 230, 230);
-  text-align: center;
-  padding: 1rem
+    width: 260px;
+    margin: 10px;
+    border: 1px solid gray;
+    border-radius: 20px 20px 5px 5px;
+    background-color: chartreuse;
+}
+.container img{
+    width: 250px;
+    border-radius: 20px 20px 0 0;
+}
+.text{
+    padding: 5px;
 }

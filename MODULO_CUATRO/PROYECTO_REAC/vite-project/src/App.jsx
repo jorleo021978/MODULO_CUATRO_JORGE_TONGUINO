@@ -1,16 +1,21 @@
-import React from './App.css';
-import student from '../src';
+import './App.css'
+import Card from './components/Title';
+import Image from './components/Image';
+import Unknown from './assets/Unknown.jpg';
+import Detail from './components/Detail/Detail';
+
+
 
 function App() {
+
   return (
-    <div>
-      <h1>Artista/Cantante Favorito</h1>
-      <img src={student} alt="Foto pelicula" />
-      <p>
-        Breve  descripción de la pelicula.
-        Puedes incluir detalles como su nombre, género, logros, etc.
-      </p>
-    </div>
+    <div className='container'>      
+        <div className='text'>
+        <Image url={Unknown}/>
+        <Card titulo='Es un titulo..'/>
+        <Detail genre='Accion' status='ok'/>
+        </div>
+    </div>    
   );
 }
 
