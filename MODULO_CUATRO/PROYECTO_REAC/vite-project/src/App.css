@@ -1,14 +1,41 @@
-.container{
-    width: 260px;
-    margin: 10px;
-    border: 1px solid gray;
-    border-radius: 20px 20px 5px 5px;
-    background-color: chartreuse;
-}
-.container img{
+.card_container{
     width: 250px;
-    border-radius: 20px 20px 0 0;
+    border: 1px solid rebeccapurple;
+    border-radius: 10px;
+    background-color: rgb(115, 158, 95);
 }
-.text{
-    padding: 5px;
+.cards_container{
+    display: flex;
+    gap: 20px;
+}
+.cards_container  img{
+    width: 250px ;
+    height: 200px;
+    border-radius: 10px;
+}
+.justificar-linea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(11, 11, 12);
+}
+.button{
+    background-color: cadetblue;
+    width: 125px;
+    height: 40px;
+    color: rgb(94, 206, 206);
+    font-size: 20px;
+}
+.button:hover{
+    color: black;
+}
+.button_superio{
+    width: 250px;
+    height: 40px;
+    background-color: cadetblue;
+    font-size: 18px;
+    color: rgb(94, 206, 206);
+}
+.button_superio:hover{
+    color: black;
 }
