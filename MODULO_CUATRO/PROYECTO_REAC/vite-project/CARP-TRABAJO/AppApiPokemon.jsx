@@ -3,21 +3,19 @@ import Card from './components/Card';
 import { useEffect, useState } from 'react';
 
 function App() {
-  const [character, setCharacter] = useState(null);
-  const [characterList, setCharacterList] = useState([]);
+  const [pokemon, setPokemon] = useState(null);
+  const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [viewSingle, setViewSingle] = useState(true); 
-  const [characterId, setCharacterId] = useState(1);
-  const [page, setPage] = useState(1); // Mirar el número de página
+  const [pokemonCharacterId, setPokemonCharacterId] = useState(12); 
+  const [offset, setOffset] = useState(0); 
+  const limit = 20; 
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-
     if (viewSingle) {
-      // Obtener detalles de un solo personaje
-      fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
+      // Obtener detalles de un solo Pokémon
+      fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonCharacterId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error('Error en la solicitud');
@@ -25,7 +23,7 @@ function App() {
           return response.json();
         })
         .then((result) => {
-          setCharacter(result);
+          setPokemon(result);
           setLoading(false);
         })
         .catch((error) => {
@@ -33,8 +31,10 @@ function App() {
           setLoading(false);
         });
     } else {
-      // Obtener la lista de personajes con paginación
-      fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
+      // Obtener la lista de los primeros 20 Pokémon con paginación
+      const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
+
+      fetch(url)
         .then((response) => {
           if (!response.ok) {
             throw new Error('Error en la solicitud');
@@ -42,7 +42,13 @@ function App() {
           return response.json();
         })
         .then((data) => {
-          setCharacterList(data.results);
+          const promises = data.results.map((pokemon) =>
+            fetch(pokemon.url).then((res) => res.json())
+          );
+          return Promise.all(promises);
+        })
+        .then((pokemonData) => {
+          setPokemonList(pokemonData);
           setLoading(false);
         })
         .catch((error) => {
@@ -50,7 +56,7 @@ function App() {
           setLoading(false);
         });
     }
-  }, [viewSingle, characterId, page]); 
+  }, [viewSingle, pokemonCharacterId, offset]);
 
   if (loading) {
     return <div>Cargando...</div>;
@@ -65,56 +71,56 @@ function App() {
   };
 
   const handleInputChange = (e) => {
-    setCharacterId(e.target.value);
+    setPokemonCharacterId(e.target.value);
   };
 
   const handlePrevious = () => {
-    setPage((prevPage) => Math.max(prevPage - 1, 1));
+    setOffset((prevOffset) => Math.max(prevOffset - limit, 0));
   };
 
   const handleNext = () => {
-    setPage((prevPage) => prevPage + 1);
+    setOffset((prevOffset) => prevOffset + limit);
   };
-
   return (
     <div>
       <button className='button_superio' onClick={handleViewChange}>
-        {viewSingle ? 'Ver lista de personajes' : 'Ver un personaje específico'}
+        {viewSingle ? 'Ver los primeros 20 Pokémon' : 'Ver un Pokémon específico'}
       </button>
       {viewSingle && (
         <div>
           <input
             type="number"
-            value={characterId}
+            value={pokemonCharacterId}
             onChange={handleInputChange}
-            placeholder="ID de personaje"
+            placeholder="ID de Pokémon"
             min="1"
           />
         </div>
       )}
       <div className="cards_container">
         {viewSingle ? (
-          character && (
+          pokemon && (
             <Card
-              image={character.image}
-              title={character.name}
-              detail={`Status: ${character.status}`}
+              image={pokemon.sprites.front_default}
+              title={pokemon.name}
+              detail={pokemon.abilities[0].ability.name}
             />
           )
         ) : (
-          characterList.map((character) => (
+          pokemonList.map((pokemon) => (
             <Card
-              key={character.id}
-              image={character.image}
-              title={character.name}
-              detail={`Status: ${character.status}`}
+              key={pokemon.id}
+              image={pokemon.sprites.front_default}
+              title={pokemon.name}
+              detail={pokemon.abilities[0]?.ability.name || 'No abilities'}
             />
           ))
         )}
       </div>
       {!viewSingle && (
         <div className="pagination">
-          <button className='button' onClick={handlePrevious} disabled={page === 1}>
+          <br/>
+          <button className='button' onClick={handlePrevious} disabled={offset === 0}>
             Anterior
           </button>
           <button className='button' onClick={handleNext}>
