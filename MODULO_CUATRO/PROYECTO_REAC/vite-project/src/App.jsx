@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import '../src/components/Detail/mediaQuety.css'
 import Card from './components/Card';
 
 function App() {
@@ -21,10 +22,8 @@ function App() {
       try {
         let response;
         if (viewSingle) {
-          // Obtener detalles de un solo personaje
           response = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`);
         } else {
-          // Obtener la lista de personajes con paginación
           const url = searchQuery
             ? `https://rickandmortyapi.com/api/character/?name=${searchQuery}&page=${page}`
             : `https://rickandmortyapi.com/api/character?page=${page}`;
@@ -48,7 +47,7 @@ function App() {
         setLoading(false);
         setTimeout(() => {
           window.location.reload();
-        }, 3000); // Reiniciar la página después de 3 segundos
+        }, 2000);
       }
     };
 
@@ -115,72 +114,78 @@ function App() {
   };
 
   return (
-    <div>
-      <button className='button_superio' onClick={handleViewChange}>
-        {viewSingle ? 'Ver lista de personajes' : 'Ver un personaje específico'}
-      </button>
-      <div className="search-container">
-        <div className="search-box">
-          <input
-            className='button_superio'
-            type="number"
-            value={characterId}
-            onChange={handleInputChange}
-            placeholder="ID de personaje"
-            min="1"
-            max="99999"
-          />
-          <button className="search-button" onClick={handleSearchClick}>
-            <span role="img" aria-label="search">🔍</span>
-          </button>
-        </div>
-        <br />
-        <div className="search-box">
-          <input
-            className='button_superio'
-            type="text"
-            value={searchQuery}
-            onChange={handleSearchChange}
-            placeholder="Buscar personaje por nombre"
-          />
-          <button className="search-button" onClick={handleSearchClick}>
-            <span role="img" aria-label="search">🔍</span>
-          </button>
-        </div>
+    <>
+      <div>
+        <h1 className='box_title'>Personajes Ricky And Mortin</h1>
       </div>
-      <div className={`cards_container ${characterList.length === 1 ? 'single-card' : ''}`}>
-        {viewSingle ? (
-          character && (
-            <Card
-              image={character.image}
-              title={character.name}
-              gender={character.gender}
-              status={character.status}
+      <div>
+        <div className="search-box">
+          <button className='button_superior' onClick={handleViewChange}>
+            {viewSingle ? 'Ver lista de personajes' : 'Ver un personaje específico'}
+          </button>
+          <br />
+          <div className="input-group">
+            <input
+              className='button_superior_id'
+              type="number"
+              value={characterId}
+              onChange={handleInputChange}
+              placeholder="ID de personaje"
+              min="1"
+              max="99999"
             />
-          )
-        ) : (
-          characterList.map((character) => (
-            <Card
-              key={character.id}
-              image={character.image}
-              title={character.name}
-              gender={character.gender}
-              status={character.status}
+            {/*<button className="search-button_id" onClick={handleSearchClick}>
+              <span role="img" aria-label="search">🔍</span>
+            </button>*/}
+          </div>
+          <br />
+          <div className="input-group">
+            <input
+              className='button_derecho'
+              type="text"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              placeholder="Buscar personaje por nombre"
             />
-          ))
+            {/*<button className="search-button" onClick={handleSearchClick}>
+              <span role="img" aria-label="search">🔍</span>
+          </button>*/}
+          </div>
+        </div>
+        <div className={`cards_container ${characterList.length === 1 ? 'single-card' : ''}`}>
+          {viewSingle ? (
+            character && (
+              <Card
+                image={character.image}
+                title={character.name}
+                gender={character.gender}
+                status={character.status}
+              />
+            )
+          ) : (
+            characterList.map((character) => (
+              <Card
+                key={character.id}
+                image={character.image}
+                title={character.name}
+                gender={character.gender}
+                status={character.status}
+              />
+            ))
+          )}
+        </div>
+        {!viewSingle && (
+          <div className="pagination">
+            <button className='button' onClick={handlePrevious} disabled={page === 1}>
+              Anterior
+            </button>
+            <button className='button' onClick={handleNext}>
+              Siguiente
+            </button>
+          </div>
         )}
       </div>
-      {!viewSingle && (
-        <div className="pagination">
-          <button className='button' onClick={handlePrevious} disabled={page === 1}>
-            Anterior
-          </button>
-          <button className='button' onClick={handleNext}>
-            Siguiente
-          </button>
-        </div>
-      )}
-    </div>
+    </>
   );
 }
 

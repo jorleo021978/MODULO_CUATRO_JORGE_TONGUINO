@@ -1,0 +1,43 @@
+@media (max-width: 599px) {
+    .box_title {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  @media (min-width: 600px) and (max-width: 1199px) {
+    .box_title {
+      font-size: 18px;
+      padding: 15px;
+    }
+    .button_superior{
+      font-size: 15px;
+    }
+  }
+  @media (max-width: 599px) {
+    .cards_container .card  {
+        width: var(--card-width, 150px);
+        width: 170px; 
+        border-radius: 50px 10px 50px 10px ;
+        background-color: rgb(102, 161, 9);
+    }
+    .nombre:hover{
+        width: 80px;
+        font-size: 15px;
+
+    }
+  }
+  @media (min-width: 600px) and (max-width: 1199px) {
+    .cards_container .card {
+        width: var(--card-width, 150px);
+        width: 200px; 
+        border-radius: 50px 10px 50px 10px ;
+        background-color: rgb(129, 187, 34);
+    }
+  }
+  
+  @media (max-width: 599px) {
+    .detail:hover {
+        font-size: 20px;
+        transform: scale(1);
+    }
+  }

@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 CAROETA _TRABAJO
+CARP-TRABAJO
 dist
 dist-ssr
 *.local

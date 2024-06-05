@@ -9,7 +9,7 @@ function App() {
   const [genre, setGenre] = useState("");
   const [status, setStatus] = useState("");
 
-  const rickAndMortyCharacterId = 40;
+  const rickAndMortyCharacterId = 1;
 
     useEffect( () => {
       fetch("https://rickandmortyapi.com/api/character/"+rickAndMortyCharacterId)
