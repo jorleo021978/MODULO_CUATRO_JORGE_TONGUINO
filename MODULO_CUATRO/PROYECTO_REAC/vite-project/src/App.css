@@ -1,59 +1,61 @@
-.card_container{
-    width: 250px;
-    border: 1px solid rebeccapurple;
-    border-radius: 10px;
-    background-color: rgb(115, 158, 95);
-}
-.cards_container{
+.cards_container .card {
+    width: var(--card-width, 250px);
+    width: 250px; 
+    border-radius: 50px 10px 50px 10px ;
+    background-color: rgb(124, 139, 100);
+  }
+  
+  .cards_container img {
+    width: var(--image-width, 100%); /* Ancho de la imagen */
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+  .cards_container img:hover{
+    transform: scale(1.6);
+  }
+  .cards_container .single-card .card {
+    width: var(--single-card-width, 400px); /* Ancho de la tarjeta cuando solo hay una */
+  }
+  
+  .cards_container .single-card img {
+    width: var(--single-image-width, 100%); /* Ancho de la imagen cuando solo hay una */
+    height: auto;
+  }
+  .cards_container .card:hover{
+    background-color: rgb(169, 192, 131);
+  }
+.cards_container {
     display: flex;
-    gap: 20px;
-}
-.cards_container  img{
-    width: 250px ;
-    height: 200px;
-    border-radius: 10px;
-}
-.justificar-linea{
-    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
     justify-content: center;
-    align-items: center;
-    color: rgb(11, 11, 12);
-}
-.button{
-    background-color: cadetblue;
-    width: 125px;
-    height: 40px;
-    color: rgb(94, 206, 206);
-    font-size: 20px;
-}
-.button:hover{
-    color: black;
-}
-.button_superio{
-    width: 250px;
-    height: 40px;
-    background-color: cadetblue;
-    font-size: 18px;
-    color: rgb(94, 206, 206);
-}
-.button_superio:hover{
-    color: black;
-}
-
-.search-container {
+    background-color: azure;
+    margin: 10px;
+  }
+  .cards_container img {
+    width: 100%; 
+    height: auto;
+    border-radius: 40px 10px 40px 10px ;
+  }
+  .card{
     display: flex;
     flex-direction: column;
-    margin: 20px 0;
-  }
-  
-  .search-box {
-    display: flex;
     align-items: center;
+    color: black;
+    font-weight: 700;
+    font-family: 'Calibri';
   }
-  
-  .search-button {
-    cursor: pointer;
-    font-size: 20px;
-    margin-left: 10px;
+  .nombre{
+    color: black;
   }
-  
+  .nombre:hover{
+    color: rgb(17, 104, 21);
+    transform: scale(1.6);
+  }
+  .detail{
+    color: black;
+  }
+  .detail:hover{
+    color: rgb(17, 104, 21);
+    transform: scale(1.6);
+  }

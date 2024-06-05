@@ -1,14 +1,16 @@
-import '../App.css'
-import image from '../assets/perro.jpg'
+import React from 'react';
 
-const Card = (props) => {
-    return (
-        <div className='card_container'>
-            <img width="250px" src={props.image}/>
-            <h2 className='justificar-linea'>{props.title}</h2>
-            <p className='justificar-linea'>{props.detail}</p>
-        </div>
-    )
+function Card({ image, title, gender, status }) {
+  return (
+    <div className="card">
+      <img src={image} alt={title} />
+      <div>
+        <h2 className='nombre'>{title}</h2>
+        <p className='detail'>Género: {gender}</p>
+        <p className='detail'>Estado: {status}</p>
+      </div>
+    </div>
+  );
 }
 
 export default Card;
